@@ -1,4 +1,8 @@
 class calculator:
+    #attributes here
+    # ---------
+    
+    # methods here
     def calculate(self, num1,num2, symbol):
         ans = 0
         if symbol == '+':
