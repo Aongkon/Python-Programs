@@ -30,3 +30,6 @@ class Student(Family, School, Sports):
 # my_family = Family('Dighirchala')
 student1 = Student("Dighirchala", 101, 12, "Football")
 print(student1)
+
+# hybrid inheritance ---> 
+# grandpa -> father, uncle, aunty -> child(father, uncle, aunty)
