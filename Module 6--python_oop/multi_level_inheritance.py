@@ -37,6 +37,7 @@ class ACBus(Bus):
         super().__init__(name, price, seat)
 
     def __repr__(self) -> str:
+        print(f'{self.seat}, {self.temperature}')
         return super().__repr__()
     
 
