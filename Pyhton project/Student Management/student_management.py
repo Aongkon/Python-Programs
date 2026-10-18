@@ -28,9 +28,13 @@ class Student:
         else:
             print('Student is not enrolled')
 
+    def view_student_info(self, view_st_id):
+        if view_st_id == self.student_id:
+            print(f"Student ID: {self.student_id} \nName: {self.name} \nDepartment: {self.department} \nEnrollment Status: {self.is_enrolled}")
+
     
 robin = Student(223301, 'Robin', 'CSE', True)
-kobir = Student(223302, 'Kobir', 'CSE', True)
+kobir = Student(223302, 'Kobir', 'CSE', False)
 chobir = Student(223303, 'Chobir', 'CSE', True)
 mofij = Student(223304, 'mofij', 'CSE', False)
 hasem = Student(223305, 'hasem', 'CSE', True)
@@ -41,20 +45,22 @@ database = StudentDatabase()
 for st in student:
     database.add_student(st)
 
+hasem.view_student_info(223305)
+
 # database.add_student(chobir) 
 # database.add_student(kobir) 
 
-for st_list in database.student_list:
-    print(st_list.name)
+# for st_list in database.student_list:
+#     print(st_list.name)
     # print(st_list.student_id)
 
 
-print('\n')
+# print('\n')
 
-mofij.enroll_student()
+# mofij.enroll_student()
 
-hasem.enroll_student()
-print(hasem.is_enrolled)
+# hasem.enroll_student()
+# print(hasem.is_enrolled)
 
-hasem.drop_student()
-print(hasem.is_enrolled)
+# hasem.drop_student()
+# print(hasem.is_enrolled)
