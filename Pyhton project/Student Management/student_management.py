@@ -9,31 +9,37 @@ class StudentDatabase:
     
 class Student:
     def __init__(self, student_id, name, department, is_enrolled) -> None:
-        self.student_id = student_id
-        self.name = name
-        self.department = department
-        self.is_enrolled = is_enrolled
+        self.__student_id = student_id
+        self.__name = name
+        self.__department = department
+        self.__is_enrolled = is_enrolled
 
+    def get_student_id(self):
+        return self.__student_id
+    
     def enroll_student(self):
-        if self.is_enrolled == True:
+        if self.__is_enrolled == True:
             print('Student is already enrolled')
         else:
-            self.is_enrolled = True
+            self.__is_enrolled = True
             print('Student enrolled successfully')
 
     def drop_student(self):
-        if self.is_enrolled:
-            self.is_enrolled = False
+        if self.__is_enrolled:
+            self.__is_enrolled = False
             print('Student dropped successfully')
         else:
             print('Student is not enrolled')
 
     def view_student_info(self): # self parameter receive the object value
         # if view_st_id == self.student_id:
-        print(f"Student ID: {self.student_id} \nName: {self.name} \nDepartment: {self.department} \nEnrollment Status: {self.is_enrolled}")
+        print(f"Student ID: {self.__student_id} \nName: {self.__name} \nDepartment: {self.__department} \nEnrollment Status: {self.__is_enrolled}")
         
     def id_selector(self):
-        print(f'{self.student_id}')
+        print(f'{self.__student_id}')
+
+    # def error_handling(self):
+
 
     
 robin = Student(223301, 'Robin', 'CSE', False)
@@ -94,32 +100,39 @@ while True:
     elif choice == '2':
         student_id = int(input('Enter the student ID: '))
 
-        found_student = None
-        for st in database.student_list:
-            if student_id == st.student_id:
-                # Student.enroll_student() 
-                found_student = st
-                break
-
-        if found_student is not None:
-            found_student.enroll_student()
+        if isinstance(student_id, int):
+            found_student = None
+            for st in database.student_list:
+                if student_id == st.get_student_id():
+                    # Student.enroll_student() 
+                    found_student = st
+                    break
+            
+            if found_student is not None:
+                found_student.enroll_student()
+            else:
+                print('Error: Invalid Student ID.')
         else:
-            print('Error: Invalid Student ID.')
+          print("Error: Invalid choice. Please try again.")
 
     elif choice == '3':
         student_id = int(input('Enter the student ID: '))
-        found_student = None
 
-        for st in database.student_list:
-            if student_id == st.student_id:
-                found_student = st
-                break
-
-        if found_student is not None:
-            # Student.drop_student()
-            found_student.drop_student()
+        if isinstance(student_id, int):
+            found_student = None
+            
+            for st in database.student_list:
+                if student_id == st.get_student_id():
+                    found_student = st
+                    break
+            
+            if found_student is not None:
+                # Student.drop_student()
+                found_student.drop_student()
+            else:
+                print("Error: Invalid Student ID.")
         else:
-            print("Error: Invalid Student ID.")
+            print('Error: Invalid Student ID.')
 
     elif choice == '4':
         print('Exiting Student Management System...')
