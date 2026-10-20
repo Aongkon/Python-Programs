@@ -41,6 +41,8 @@ class Hall:
 
 # eta main logic
     def book_tickets(self, id, name, phone, booking_seats):
+        flag = 0
+        self.booked_tickets = []
         for x in booking_seats:
             r = ord(x[0])-65 # character k integer e anar jonno ord use kore
             c = ord(x[1])-49
@@ -51,6 +53,22 @@ class Hall:
                 print(x,"is already booked")
             else:
                 self.seats[id][r][c] = 'x'
+                self.booked_tickets.append(x)
+                flag = 1
+
+        if flag == 1:
+            print('\n\t ##### Ticket booked successfully #####')
+            print("\n-------------------------------------------------\n")
+            print('Name: ', name)
+            print('Phone: ', phone)
+            for i in self.show_list:
+                if i[0] == id:
+                    print(f'Movie: {i[1]} Time: Today at {i[2]}')
+            print('Tickets: ', end=' ')
+            for i in self.booked_tickets:
+                print(i, end=' ')
+            print(f'\nHall no: {self.hall_no}')
+            print('Price: ', 500*len(self.booked_tickets), 'TK')
 
 
 my_hall = Hall(2, 6, 8)
