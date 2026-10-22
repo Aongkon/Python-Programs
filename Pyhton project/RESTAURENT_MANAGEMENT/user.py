@@ -18,16 +18,22 @@ class Customer(User):
     def add_to_cart(self, restaurant, item_name, quantity):
         item = restaurant.menu.find_item(item_name)
         if item:
-            item.quantity = quantity
-            self.cart.add_item(item)
-            print('Item added')
+            if quantity > item.quantity:
+                print('Item quantity exceeded!!')
+            else:
+                item.quantity = quantity
+                self.cart.add_item(item)
+                print('Item added')
         else:
-            print("Item not found")
+            print("Item not found*")
+
     def view_cart(self):
         print("*******View Cart********")
         print("Name\tPrice\tQuantity")
         for item, quantity in self.cart.items.items():
             print(f'{item.name} {item.price} {quantity}')
+        # print(f'Total price: {self.cart.total_price()}')
+        print(f'Total price: {self.cart.total_price}')
 
 class Order:
     def __init__(self):
@@ -42,6 +48,8 @@ class Order:
     def remove_item(self, item):
         if item in self.items:
             del self.items[item]
+
+    @property # eta ekta variable hoye geche ekhn
     def total_price(self):
         return sum(item.price * quantity for item, quantity in self.items.items())
 
@@ -94,8 +102,8 @@ class Menu:
         self.items.append(item)
 
     def find_item(self, item_name):
-        for item in self.items:
-            if item_name == item:
+        for item in self.items:    #####
+            if item_name.lower() == item.name.lower(): # item.name hocche stringta
                 return item  # age find korbe then oi item ta pathabe removed othoda cart e add korar jonno
         return None
     
@@ -137,3 +145,9 @@ admin.add_new_item(mamar_res, item2)
 customer1 = Customer('jibon', 'jibon@gmail.com', 125678, 'gazipur dhaka')
 # customer1.view_menu(mamar_res)
 customer1.view_menu(mamar_res)
+
+item_name = input('Enter item name: ')
+item_quantity = int(input('Enter item quantity: '))
+
+customer1.add_to_cart(mamar_res, item_name, item_quantity)
+customer1.view_cart()
