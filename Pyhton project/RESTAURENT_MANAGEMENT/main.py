@@ -6,6 +6,7 @@ from user import Customer, Employee, Admin
 
 mamar_restaurant = Restaurant("Mamar Restaurant")
 def customer_menu():
+    print('------------------------------------------------------')
     name = input('Enter your name: ')
     email = input('Enter your email: ')
     phone = input('Enter your phone: ')
@@ -13,6 +14,7 @@ def customer_menu():
     customer = Customer(name=name, email=email, phone=phone, address=address)
 
     while True:
+        print('------------------------------------------------------')
         print(f"Welcome {customer.name}!!")
         print(f"1. View menu")
         print(f"2. Add item to cart")
@@ -40,6 +42,7 @@ def customer_menu():
 
 
 def admin_menu():
+    print('------------------------------------------------------')
     name = input('Enter your name: ')
     email = input('Enter your email: ')
     phone = input('Enter your phone: ')
@@ -47,6 +50,7 @@ def admin_menu():
     admin = Admin(name=name, email=email, phone=phone, address=address)
 
     while True:
+        print('------------------------------------------------------')
         print(f"Welcome {admin.name}!!")
         print(f"1. Add new item")
         print(f"2. Add new employee")
@@ -61,21 +65,23 @@ def admin_menu():
             item_name = input("Enter item name: ")
             item_price = int(input("Enter item price: "))
             item_quantity = int(input("Enter item quantity: "))
-            item = FoodItem(item_name, item_quantity, item_price)
+            item = FoodItem(item_name,  item_price, item_quantity)
             admin.add_new_item(mamar_restaurant, item)
         elif choice == 2:
             name = input('Enter employee name: ')
             phone = int(input('Enter employee phone No.: '))
             email = input('Enter employee email: ')
-            address = input('Enter employee name: ')
+            address = input('Enter employee address: ')
             designation = input('Enter employee designation: ')
             age = input('Enter employee age: ')
             salary = input('Enter employee salary: ')
+            employee = Employee(name, phone, email, address, age, designation, salary)
+            admin.add_employee(mamar_restaurant, employee)
 
-            admin.add_employee(name, phone, email, address, 
-                               age, designation, salary)
         elif choice == 3:
+            print("Choice 3 selected!")
             admin.view_employee(mamar_restaurant)
+            print("Employee function finished!")
         elif choice == 4:
             admin.view_menu(mamar_restaurant)
         elif choice == 5:
@@ -87,10 +93,11 @@ def admin_menu():
             print('Invalid Input')
 
 while True:
+    print('------------------------------------------------------')
     print("Welcome!!")
     print("1.Customer Site")
     print("2.Admin Panel")
-    print("3. Exit")
+    print("3.Exit")
 
     choice = int(input("Enter your choice: "))
     if choice == 1:

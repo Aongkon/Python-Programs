@@ -76,23 +76,23 @@ class Admin(User):
 
 
 
-mamar_res = Restaurant('Mamar Restaurant')
-mn = Menu()
-item = FoodItem('Pizza', 12, 10)
-item2 = FoodItem('Burger', 10, 30)
-admin = Admin('jibon', 'jibon@gmail.com', 125678, 'gazipur dhaka')
-admin.add_new_item(mamar_res, item)
-admin.add_new_item(mamar_res, item2)
+# mamar_res = Restaurant('Mamar Restaurant')
+# mn = Menu()
+# item = FoodItem('Pizza', 12, 10)
+# item2 = FoodItem('Burger', 10, 30)
+# admin = Admin('jibon', 'jibon@gmail.com', 125678, 'gazipur dhaka')
+# admin.add_new_item(mamar_res, item)
+# admin.add_new_item(mamar_res, item2)
 # mn.add_menu_item(item)
 # mn.add_menu_item(item2)
 # mn.show_menu()
 
-customer1 = Customer('jibon', 'jibon@gmail.com', 125678, 'gazipur dhaka')
+# customer1 = Customer('jibon', 'jibon@gmail.com', 125678, 'gazipur dhaka')
 # customer1.view_menu(mamar_res)
-customer1.view_menu(mamar_res)
+# customer1.view_menu(mamar_res)
 
-item_name = input('Enter item name: ')
-item_quantity = int(input('Enter item quantity: '))
+# item_name = input('Enter item name: ')
+# item_quantity = int(input('Enter item quantity: '))
 
-customer1.add_to_cart(mamar_res, item_name, item_quantity)
-customer1.view_cart()
+# customer1.add_to_cart(mamar_res, item_name, item_quantity)
+# customer1.view_cart()

@@ -13,13 +13,14 @@ class Menu:
     
     def remove_item(self, item_name):
         item = self.find_item(item_name)
-        if item_name == item:
+        if item is not None:
             self.items.remove(item)
             print('Item deleted')
         else:
             print('Item not found')
 
     def show_menu(self):
+        print('------------------------------------------------------')
         print('**********MENU**********')
         print("Name\tPrice\tQuantity")
         for item in self.items:
