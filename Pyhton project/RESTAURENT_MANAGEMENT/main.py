@@ -86,3 +86,19 @@ def admin_menu():
         else:
             print('Invalid Input')
 
+while True:
+    print("Welcome!!")
+    print("1.Customer Site")
+    print("2.Admin Panel")
+    print("3. Exit")
+
+    choice = int(input("Enter your choice: "))
+    if choice == 1:
+        customer_menu()
+    elif choice == 2:
+        admin_menu()
+    elif choice == 3:
+        break
+    else:
+        print("Invalid Input")
+
