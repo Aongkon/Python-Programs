@@ -7,10 +7,13 @@ class School:
 
     def add_classroom(self, classroom):
         self.classrooms[classroom.name] = classroom
+
     def add_teacher(self, subject, teacher):  # value = teacher , key = subject
         self.teachers[subject] = teacher  # subject tomo key er moddhe teacher value ke rakhtasi
+
     def student_admission(self, student):
-        pass
+        classname = student.classroom
+        classname.add_student(student)
 
     @staticmethod
     def calculate_grade(marks):
@@ -59,4 +62,36 @@ class School:
         else:
             return "F"
     def __repr__(self):
-        pass
+        # All Classrooms
+        # for key, value in self.classrooms.items():
+        for key in self.classrooms.keys():
+            print(key)
+        # All Students 
+        print("All Students")
+        result = ' '
+
+        for key, value in self.classrooms.items(): # protita classroom er under e student golo ache
+            result += f"-----{key.upper()} Classroom Students\n"
+            for student in value.students:
+                result += f"{student.name}\n"
+        print(result)
+            
+        # All Subjects 
+        subject = ' '
+        for key, value in self.classrooms.items():
+            subject += f'-----{key.upper()} Classroom Subjects\n'
+            for sub in value.subjects:
+                subject += f"{sub.name}\n"
+        print(subject)
+
+        # All Teachers -> Homework
+
+        # All Student Results
+        for key, value in self.classrooms.items():
+            for student in value.students:
+                for sub_name, mark in student.marks.items():
+                    print(student.name, sub_name, mark, student.subject_grade[sub_name])
+                print(student.calculate_final_grade())
+        return ' '
+
+        
