@@ -1,3 +1,5 @@
+import random
+
 class School:
     def __init__(self, name, address):
         self.name = name
@@ -14,15 +16,60 @@ class School:
         classname = student.classroom # classroom ta ashole student class er attribute 
         # abar ey classroom tai moloto ekta class jar moddhe students, subjects egolo ache
         classname.add_student(student)
-    def calculate_grade(self, marks):
-        pass
-    def grade_to_value():
-        sum = 0
 
-    def value_to_grade():
-            pass
+    @staticmethod
+    def calculate_grade(marks):
+        if marks >= 80 and marks <= 100:
+            return "A+"
+        elif marks >= 70 and marks <= 79:
+            return "A"
+        elif marks >= 60 and marks <= 69:
+            return "A-"
+        elif marks >= 50 and marks <= 59:
+            return "B"
+        elif marks >= 50 and marks <= 59:
+            return "C"
+        elif marks >= 40 and marks <= 49:
+            return "D"
+        else:
+            return "F"
+        
+    @staticmethod
+    def grade_to_value(grade):
+        grade_map = {
+            "A+" : 5.00,
+            "A" : 4.00,
+            "A-" : 3.50,
+            "B" : 3.00,
+            "C" : 2.50,
+            "D" : 2.00,
+            "F" : 0.00
+        }
+        return grade_map[grade]
+    
+    @staticmethod
+    def value_to_grade(value):
+        if value >= 5.00:
+            return "A+"
+        elif value >= 4.00 and value < 5.00:
+            return "A"
+        elif value >= 3.50 and value < 4.00:
+            return "A-"
+        elif value >= 3.00 and value < 3.50:
+            return "B"
+        elif value >= 2.50 and value < 3.00:
+            return "C"
+        elif value >= 2.00 and value < 2.50:
+            return "D"
+        else:
+            return "F"
+        
     def __repr__(self):
-         pass
+        # All class room
+        for key in self.classrooms.keys():
+            print(key)
+        # All student
+        print("All Student")
 
 
 class ClassRoom:
@@ -62,17 +109,29 @@ class Teacher(Person):
     def teach(self):
         pass
     def evaluate_exam(self):
-        pass
+        return random.randint(1, 100)
 
 class Student(Person):
     def __init__(self, name, classroom):
         super().__init__(name)
         self.classroom = classroom
-        self.marks = {} 
-        self.subject_grade = {}
-        self.total_grade = None
-    def calculate_final_grade():
-        pass
+        self.marks = {} # {"english": 67, 'bangla': 89}
+        self.subject_grade = {} # {"ict" : "A"}
+        self.total_grade = None 
+
+    def calculate_final_grade(self):
+        sum = 0
+        for grade in self.subject_grade.values():
+            point = School.grade_to_value(grade)
+            sum += point
+            if sum == 0:
+                gpa = 0.00
+                grade = "F"
+            else:
+                gpa = sum / len(self.subject_grade)
+                self.total_grade = School.value_to_grade(gpa)
+            print(f'{self.name} final grade is: {self.total_grade}, with gpa: {gpa}')
+
 
 
     @property
