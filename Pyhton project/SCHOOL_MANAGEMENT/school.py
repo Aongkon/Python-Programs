@@ -70,6 +70,30 @@ class School:
             print(key)
         # All student
         print("All Student")
+        result = ' '
+        for key, value in self.classrooms.items():
+            result += f"---------{key.upper()} Classroom Students\n"
+            for student in value.students:
+                result += f"{student.name}\n"
+        print(result)
+
+        # All Subjects
+        subject = ' '
+        for key, value in self.classrooms.items():
+            subject += f'-------{key.upper()} Classroom Subject\n'
+            for sub in value.subjects:
+                subject += f'{sub.name}\n'
+        print(subject)
+
+        # All Student Results
+        for value in self.classrooms.values():
+            for student in value.students:
+                for sub_name, mark in student.marks.items():
+                    print(f"{student.name} => {sub_name} => {mark} => {student.subject_grad[sub_name]}")
+                print(student.calculate_final_grad())
+            return " "
+            
+
 
 
 class ClassRoom:
@@ -79,13 +103,20 @@ class ClassRoom:
         self.subjects = []
 
     def add_student(self, student):
+        roll_no = f'{self.name} - {len(self.students)}'
+        student.id = roll_no
         self.students.append(student)
 
     def add_subject(self, subject):
         self.subjects.append(subject)
 
     def take_semester_final(self):
-        pass
+        for subject in self.subjects:
+            subject.exam(self.students)
+
+        for student in self.students:
+            student.calculate_final_grade()
+
     def get_top_students(self):
         pass
 
@@ -95,8 +126,12 @@ class Subject:
         self.teacher = teacher
         self.max_marks = 100
         self.pass_marks = 40
-    def exam(self, students):
-        pass
+
+    def exam(self, students): # students eta porata ekta list astase
+        for student in students:
+            mark = self.teacher.evaluate_exam()
+            student.marks[self.name] = mark  # student.marks eta student class er ekta dictionary
+            student.subject_grade[self.name] = School.calculate_grade(mark)
 
 
 class Person:
@@ -106,8 +141,10 @@ class Person:
 class Teacher(Person):
     def __init__(self, name):
         super().__init__(name)
+
     def teach(self):
         pass
+
     def evaluate_exam(self):
         return random.randint(1, 100)
 
@@ -130,7 +167,7 @@ class Student(Person):
             else:
                 gpa = sum / len(self.subject_grade)
                 self.total_grade = School.value_to_grade(gpa)
-            print(f'{self.name} final grade is: {self.total_grade}, with gpa: {gpa}')
+                print(f'{self.name} final grade is: {self.total_grade}, with gpa: {gpa}')
 
 
 
@@ -151,6 +188,7 @@ school = School("CHS", "Cawrasta")
 eight = ClassRoom("Eight")
 nine = ClassRoom("Nine")
 ten = ClassRoom("Ten")
+
 
 school.add_classroom(eight)
 school.add_classroom(nine)
@@ -180,7 +218,21 @@ chemistry = Subject("Chemistry", motiur)
 biology = Subject("Biology", habib)
 
 
+eight.add_subject(english)
+eight.add_subject(chemistry)
+eight.add_subject(biology)
 
+nine.add_subject(english)
+nine.add_subject(chemistry)
+nine.add_subject(biology)
+
+ten.add_subject(english)
+ten.add_subject(chemistry)
+ten.add_subject(biology)
+
+eight.take_semester_final()
+nine.take_semester_final()
+ten.take_semester_final()
 
 
 
