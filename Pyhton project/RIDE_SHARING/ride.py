@@ -22,11 +22,11 @@ class RideSharing:
         return f'Company Name: {self.company_name} with Riders: {len(self.riders)} and Drivers: {len(self.drivers)}'
 
 class Ride:
-    def __init__(self, start_location, end_location, vehicle):
+    def __init__(self, rider, driver, start_location, end_location, vehicle):
         self.start_location = start_location
         self.end_location = end_location
-        self.driver_name = None
-        self.rider_name = None
+        self.driver_name = driver
+        self.rider_name = rider
         self.start_time = None
         self.end_time = None
         self.estimated_fare = self.calculate_fare(vehicle.vehicle_type)
@@ -62,7 +62,7 @@ class Ride:
         # print(f'Ride Duration: {self.end_time - self.start_time}') repr string dekhay
 
 class RideRequest:  # eykhane j user request korbe tar shokol data thakbe  --> oporer ride class thekey ashbe
-    def __init__(self,rider, end_location):
+    def __init__(self, rider, end_location):
         self.rider = rider
         self.end_location = end_location
 
@@ -79,7 +79,8 @@ class RideMatching:
                 vehicle = Car('car', '9YT53L', 57)
             elif vehicle_type == 'bike':
                 vehicle = Bike('bike', '87WE6K', 46)
-            ride = Ride(ride_request.rider.current_location, ride_request.end_location, vehicle)
+
+            ride = Ride(ride_request.rider, set_, ride_request.rider.current_location, ride_request.end_location, vehicle)
 
             driver.accept_ride(ride)
             return ride
