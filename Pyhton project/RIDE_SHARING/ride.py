@@ -22,11 +22,11 @@ class RideSharing:
         return f'Company Name: {self.company_name} with Riders: {len(self.riders)} and Drivers: {len(self.drivers)}'
 
 class Ride:
-    def __init__(self, rider, driver, start_location, end_location, vehicle):
+    def __init__(self, rider, start_location, end_location, vehicle):
+        self.rider = rider
+        self.driver = None
         self.start_location = start_location
         self.end_location = end_location
-        self.driver_name = driver
-        self.rider_name = rider
         self.start_time = None
         self.end_time = None
         self.estimated_fare = self.calculate_fare(vehicle.vehicle_type)
@@ -41,15 +41,15 @@ class Ride:
     def end_ride(self):
         self.end_time = datetime.now()
         # ride ses howar por driver ke taka dey so...
-        self.rider_name.wallet -= self.estimated_fare  # estimated_fare mane koto taka taka hoilo
-        self.driver_name.wallet += self.estimated_fare
+        self.rider.wallet -= self.estimated_fare  # estimated_fare mane koto taka taka hoilo
+        self.driver.wallet += self.estimated_fare
 
     # total cost - fare
     # 20 km gechi
     # 1 km = 30 tk
     # 20 --> 20 * 30 = 600
     def calculate_fare(self, vehicle):
-        distance = 10
+        distance = 10 # etar jaygay user theke input newa jete pare j she koto kilo par kortase
         fare_per_km = {
             'car' : 30,
             'bike' : 20,
@@ -79,9 +79,8 @@ class RideMatching:
                 vehicle = Car('car', '9YT53L', 57)
             elif vehicle_type == 'bike':
                 vehicle = Bike('bike', '87WE6K', 46)
-
-            ride = Ride(ride_request.rider, set_, ride_request.rider.current_location, ride_request.end_location, vehicle)
-
+            ride = Ride(ride_request.rider, ride_request.rider.current_location, ride_request.end_location, vehicle)
+ 
             driver.accept_ride(ride)
             return ride
 

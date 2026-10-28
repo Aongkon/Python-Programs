@@ -10,8 +10,8 @@ chobir = Driver("Cobir", "cobir@gmail.com", 456455725, "Mirpur")
 niye_jao.add_driver(chobir)
 
 robin.request_ride(niye_jao, 'Uttara', "car")
-robin.show_current_ride()
 chobir.reach_destination(robin.current_ride)
-print(niye_jao)
+robin.show_current_ride()
+# print(niye_jao)
 
 
