@@ -16,10 +16,22 @@ class Customer(User):
         restaurant.show_menu()
 
     def add_to_cart(self, restaurant, item_name, quantity):
-        item = restaurant.menu.find_item(item_name)  # jdi find_item e item ta thake tbe shei item return korbe
-        if item.quantity >= quantity:
+        item = restaurant.menu.find_item(item_name)  # jdi find_item e item ta thake tbe shei item return korbe   # just item  eta FoodItem er object
+
+        if item:
+            # if item.quantity >= quantity:  
+            if quantity > item.quantity:   # ekhane kahini ache thik koralagbo
+                print("Item Quantity Exceeded!!")
+            else:
+                item.quantity = quantity # ey line e jhamela ache thik kora lagbo
+                self.cart.add_item(item)
+                print('Item added')
+        else:
+            print("Item not found*")
             
-        
+    def view_cart(self):
+        print("*******View Cart********")
+        pass
 
     def pay_bill(self, amount):
         pass
