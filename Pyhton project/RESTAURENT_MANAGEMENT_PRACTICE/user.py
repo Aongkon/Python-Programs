@@ -1,5 +1,5 @@
 from abc import ABC
-from restaurant import Restaurant
+
 class User(ABC):
     def __init__(self, name, phone, gmail, address):
         self.name = name
@@ -12,11 +12,14 @@ class Customer(User):
         super().__init__(name, phone, gmail, address)
         self.cart = None
 
-    def view_menu(self):
-        pass
+    def view_menu(self, restaurant):
+        restaurant.show_menu()
 
-    def add_to_cart(self):
-        pass
+    def add_to_cart(self, restaurant, item_name, quantity):
+        item = restaurant.menu.find_item(item_name)  # jdi find_item e item ta thake tbe shei item return korbe
+        if item.quantity >= quantity:
+            
+        
 
     def pay_bill(self, amount):
         pass
@@ -32,13 +35,16 @@ class Admin(User):
     def __init__(self, name, phone, gmail, address):
         super().__init__(name, phone, gmail, address)
 
-    def add_employee(self, restaurant, ):
-        restaurant.add_employees()
-    def remove_employee(self):
-        pass
-    def add_item(self):
-        pass
-    def remove_item(self):
-        pass
-    def view_manu(self):
-        pass
+    def add_employee(self, restaurant, employee): # restaurant ekta object
+        restaurant.add_employees(employee)
+
+    # def remove_employee(self, restaurant, employee): etar proiojon portase na
+    #     restaurant.remove_employee(employee)
+        
+    def add_new_item(self, restaurant, item):
+        restaurant.menu.add_menu_item(item)
+
+    def remove_item(self, restaurant, item):
+        restaurant.menu.remove_menu_item(item)
+    def view_menu(self, restaurant):
+        restaurant.show_menu()
