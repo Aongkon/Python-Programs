@@ -42,7 +42,7 @@ class Customer(User):
         
     def pay_bill(self):
         print(f'Total: {self.cart.total_price} paid successfully')
-        self.cart.clear()
+        self.cart.clear() # customer tar item golo niye then shegolor bill pay korar por oi cart er to kono proiojon nei shey khetre ekta perticular customer j item niye bill pay korce tar cart clear ba empty kore dew hocche etar maddhome
 
 class Employee(User):
     def __init__(self, name, phone, email, address, age, designation, salary):
@@ -54,7 +54,6 @@ class Employee(User):
 class Admin(User):
     def __init__(self, name, phone, email, address):
         super().__init__(name, phone, email, address)
-        self.employee = [] # eta amader database
 
     def add_employee(self, restaurant, employee):
         restaurant.add_employee(employee)
