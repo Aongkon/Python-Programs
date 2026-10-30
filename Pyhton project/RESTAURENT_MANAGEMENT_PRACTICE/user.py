@@ -31,10 +31,13 @@ class Customer(User):
             
     def view_cart(self):
         print("*******View Cart********")
-        pass
+        print("Name\tPrice\tQuantity")
+        for item, quantity in self.cart.items.items():
+            print(f'{item.name} {item.price} {quantity}') # item.name, item.price egola key ba object er man
 
-    def pay_bill(self, amount):
-        pass
+    def pay_bill(self):
+        print(f'Total Price: {self.cart.total_price()}  => Paid Successfully')
+        self.cart.clear() # customer tar item golo niye then shegolor bill pay korar por oi cart er to kono proiojon nei shey khetre ekta perticular customer j item niye bill pay korce tar cart clear ba empty kore dew hocche etar maddhome
 
 class Employee(User):
     def __init__(self, name, phone, gmail, address, age, salary, designation):
