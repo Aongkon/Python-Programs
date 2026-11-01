@@ -16,22 +16,35 @@ class BusSystem:
                 self.bus_lookup[bus.number] = bus
                 print(f"Bus {bus.number} {bus.route} added successfully with {bus.total_seats} seats.")
 
-    def show_buses(self):
-        print(f'Bus Number\tRoute\tTotal Seats\tAvailable Seats')
-        for bus in self.buses:
-            print(f"{bus.number} {bus.route} {bus.total_seats} {bus.available_seats()}")
+    # def show_buses(self):
+    #     print(f'Bus Number\tRoute\tTotal Seats\tAvailable Seats')
+    #     for bus in self.buses:
+    #         print(f"{bus.number} {bus.route} {bus.total_seats} {bus.available_seats()}")
 
-    def add_passengers(self, passenger):
-        self.passengers.append(passenger)
+    # def add_passengers(self, passenger):
+    #     self.passengers.append(passenger)
 
-    def book_ticket(self):
-        bus_object = self.bus_lookup.get(self.passengers.bus_number)
+    def book_ticket(self, passenger):
+        fare = 500
+        bus_object = self.bus_lookup.get(passenger.bus_number)
+
         if bus_object is None:
             print("Bus not found!")
+            return
         
-        if bus_object.book_seats(self.passengers.request_seats):
+        if bus_object.book_seats(passenger.requested_seats):
+            self.passengers.append(passenger)
+            # print("Ticket booked successfully!")
+
+            print("\n------ TICKET ------")
+            print(f"Name   : {passenger.name}")
+            print(f"Phone  : {passenger.phone}")
+            print(f"Bus No : {bus_object.number}")
+            print(f"Route  : {bus_object.route}")
+            print(f"Seat No: {bus_object.booked_seats}")
+            print(f"Fare   : ৳ {passenger.requested_seats * fare}")
+            print("-----------------------")
             print("Ticket booked successfully!")
-            
         else:
             print("Sorry, no seats available on this bus.")
 

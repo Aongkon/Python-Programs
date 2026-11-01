@@ -3,8 +3,14 @@ from bus_system import BusSystem
 from passenger import Passenger
 
 
-admin = Admin("aongkon_07", "605@#jm7")
+admin = Admin("aongkon_07", "985@#ym5")
 system = BusSystem()
+
+def get_it(prompt):
+    value = input(prompt)
+    if value.isdigit():
+        return int(value)
+    return None
 
 while True:
     print("\n========== Bangladesh Bus Ticket Booking System ==========")
@@ -32,11 +38,17 @@ while True:
         if system.buses: # jdi bus object na thake
             bus_number = int(input("Enter bus number: "))
             name = input("Your name: ")
-            phone = int(input("Phone number: "))
+            phone = input("Phone number: ").strip()
             requested_seats = int(input("Requested Seats: "))
 
-            passenger = Passenger(bus_number=bus_number, name=name, phone=phone, requested_seats=requested_seats)
-            system.add_passengers(passenger)
+            if not name:
+                print("Name cannot be empty!")
+            elif not (phone.isdigit() and len(phone) == 11):
+                print("Invalid phone! Enter an 11-digit number.")
+            else:
+                passenger = Passenger(bus_number=bus_number, name=name, phone=phone, requested_seats=requested_seats)
+                # system.add_passengers(passenger)
+                system.book_ticket(passenger)
 
     elif choice == '3':
         system.show_buses()

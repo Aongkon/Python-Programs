@@ -9,17 +9,17 @@ class Bus:
         seats_available = self.total_seats - self.booked_seats
         return seats_available
     
-    def book_seat(self, requested_seat):
-        if self.available_seats == 0:
-            print("Sorry, no seats available on this bus.")
-        else:
-            if self.available_seats() < requested_seat:
+    def book_seats(self, requested_seat):
+        if self.available_seats() == 0:
+            # print("Sorry, no seats available on this bus.")
+            return False
+        if self.available_seats() < requested_seat:
                 # print(f'Request Rejected!!')
                 return False
-            else:
-                self.booked_seats += requested_seat
-                # print(f'Seat booked successfully.')
-                return True
+        else:
+            self.booked_seats += requested_seat
+            # print(f'Seat booked successfully.')
+            return True
 
 
 
