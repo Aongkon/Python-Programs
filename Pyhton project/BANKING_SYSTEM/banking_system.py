@@ -62,19 +62,41 @@ class Account:
         pass
 
 
-    print("\n\t---Welcome to Standard Bank---\n")
-    bank = Bank('Standard Bank')
+print("\n\t---Welcome to Standard Bank---\n")
+bank = Bank('Standard Bank')
 
 
-    while True:
-        op = input("Register/Login (r/l) : ")
+while True:
+    op = input("Register/Login (r/l) : ")
 
-        if op == 'r':
-            user_type = input("User/Admin (u/a) : ")
-            name = input("Enter your name : ")
-            email = input("Enter your email : ")
-            phone = input("Enter your phone no : ")
-            password = input("Enter your password : ")
+    if op == 'r':
+        user_type = input("User/Admin (u/a) : ")
+        name = input("Enter your name : ")
+        email = input("Enter your email : ")
+        phone = input("Enter your phone no : ")
+        password = input("Enter your password : ")
 
-            if user_type == 'u':
-                user = Account(name, email, phone, password, 'user')
+        if user_type == 'u':
+            user = Account(name, email, phone, password, 'user')
+            print(f'Welcome {name} to Standard Bank Your Administrative account No. is {user.account_no}')
+            bank.account_list.append(user)
+        else:
+            user = Account(name, email, phone, password, 'admin')
+            print(f'Welcome {name} to Standard Bank Your Administrative account No. is {user.account_no}')
+            bank.account_list.append(user)
+    elif op == 'l':
+        user_type = input("User/Admin (u/a) : ")
+        name = input("Enter your name : ")
+        password = input("Enter your password : ")
+
+        for user in bank.account_list:
+            if user.name == name:
+                if user.password == password:
+                    if user_type == 'a':
+                        logged_in_as_admin()
+                    else:
+                        logged_in_as_user()
+                else:
+                    print("Sorry, Password didn't match. Try again.")
+            else:
+                print("Sorry, Name didn't match. Try again")
