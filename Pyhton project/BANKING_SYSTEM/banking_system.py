@@ -76,4 +76,5 @@ class Account:
             phone = input("Enter your phone no : ")
             password = input("Enter your password : ")
 
-            
+            if user_type == 'u':
+                user = Account(name, email, phone, password, 'user')
