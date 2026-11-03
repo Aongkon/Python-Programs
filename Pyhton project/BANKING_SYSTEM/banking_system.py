@@ -9,7 +9,7 @@ class Bank:
         self.total_balance = 10000
         self.total_loan = 0
 
-    def add_account(self, name, email, phone, password):
+    def create_account(self, name, email, phone, password):
         pass
     def delete_account(self):
         pass
@@ -22,6 +22,8 @@ class Bank:
     def loan_on(self):
         pass
     def loan_off(self):
+        pass
+    def declare_bankrupt(self):
         pass
 
 
@@ -41,7 +43,7 @@ class Account:
         new_account_no = random.randint(100000, 199999)
         return new_account_no
 
-    def deposit(self, amount, bank):
+    def deposit(self, bank, amount):
         self.total_balance += amount
         bank.total_balance += amount # user taka deposit korle bank er takaw to bare tai
 
@@ -65,6 +67,84 @@ class Account:
 print("\n\t---Welcome to Standard Bank---\n")
 bank = Bank('Standard Bank')
 
+def logged_in_as_user():
+    print("f Welcome {user.name} to Standard Bank Your Administrative account No. is {user.account_no}")
+    while True:
+        print(" __________________________________ ")
+        print("| Press 1 for Check Balance.       |")
+        print("| Press 2 for Deposit Money.       |")
+        print("| Press 3 for Withdraw Money.      |")
+        print("| Press 4 for Take loan.           |")
+        print("| Press 5 for Transaction History. |")
+        print("| Press 6 for logout               |")
+        print("|__________________________________|")
+
+        choice = int(input("Enter your choice : "))
+
+        if choice == 1:
+            user.show_balance()
+        elif choice == 2:
+            amount = int(input("Enter the amount you want to deposit : "))
+            user.deposit(bank, amount)
+        elif choice == 3:
+            amount = int(input("Enter the amount you want to withdraw : "))
+            user.withdraw(bank, amount)
+        elif choice == 4:
+            amount = int(input("Enter the amount you want to take loan : "))
+            user.take_loan(bank, amount)
+        elif choice == 5:
+            user.transaction_history()
+        elif choice == 6:
+             print("Logging out...")
+             break
+        else:
+            print("Invalid Choice.")
+
+def logged_in_as_admin():
+    print("f Welcome {user.name} to Standard Bank Your Administrative account No. is {user.account_no}")
+    while True:
+        print(" _____________________________________________ ")
+        print("| Press 1 for Create an user account.         |")
+        print("| Press 2 for Delete an user account.         |")
+        print("| Press 3 for Show all users.                 |")
+        print("| Press 4 for Show total balance of the bank. |")
+        print("| Press 5 for Show total loan amount.         |")
+        print("| Press 6 for Turn on loan                    |")
+        print("| Press 7 for Turn off loan                   |")
+        print("| Press 8 for Declare Bankrupt                |")
+        print("| Press 9 for Logout                          |")
+        print("|_____________________________________________|")
+
+        choice = int(input("Enter your choice : "))
+
+        if choice == 1:
+            name = input("Enter name : ")
+            email = input("Enter email : ")
+            phone = input("Enter phone No : ")
+            password = input("Password : ")
+            bank.create_account(name, email, phone, password)
+        elif choice == 2:
+            acnt = int(input("Enter the account you want to delete : "))
+            bank.delete_account(acnt)
+        elif choice == 3:
+            bank.show_users()
+        elif choice == 4:
+            bank.show_total_balance()
+        elif choice == 5:
+            bank.show_total_loan
+        elif choice == 6:
+            bank.loan_on()
+        elif choice == 7:
+            bank.loan_off
+        elif choice == 8:
+            bank.declare_bankrupt()
+        elif choice == 9:
+            print("Logging out...")
+            return
+        else:
+            print("Invalid choice.")
+
+        
 
 while True:
     op = input("Register/Login (r/l) : ")
