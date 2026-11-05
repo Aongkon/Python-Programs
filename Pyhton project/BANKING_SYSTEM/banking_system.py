@@ -10,19 +10,31 @@ class Bank:
         self.total_loan = 0
 
     def create_account(self, name, email, phone, password):
-        pass
-    def delete_account(self):
-        pass
+        user = Account(name, email, phone, password)
+        self.account_list.append(user)
+        
+    def delete_account(self, account_no):
+        for person in self.account_list:
+            if person.account_no == account_no:
+                self.account_list.remove(person)
+                print(f'{person.name} deleted successfully!')
+
     def show_users(self):
-        pass
+        for user in self.account_list:
+            print(f'Name: {user.name} Account No. : {user.account_no}')
+
     def show_total_balance(self):
-        pass
+        print(self.total_balance)
+
     def show_total_loan(self):
-        pass
+        print(self.total_loan)
+
     def loan_on(self):
-        pass
+        self.loanFacility = True
+
     def loan_off(self):
-        pass
+        self.loanFacility = False
+
     def declare_bankrupt(self):
         pass
 
@@ -51,17 +63,41 @@ class Account:
         # etaw ekta transaction so etaw transaction history te add korbo
         self.transaction_history.append(f'Deposited {amount} TK')
 
-    def withdraw(self):
-        pass
+    def withdraw(self, bank, amount, ):
+        if self.total_balance >= amount:
+            self.total_balance -= amount
+            bank.total_balance -= amount
+            print(f'\nSuccessfully Withdraw {amount}. Your current balance is{self.total_balance}')
+            self.transaction_history.append(f'Withdraw {amount} TK')
+        else:
+            print("You have not enough money for withdraw!!")
 
     def show_balance(self):
-        pass
+        print(f'Your Current balance is {self.total_balance}')
 
     def show_transaction_history(self):
-        pass
+        print("\n\t---Transaction History---")
+        for history in self.transaction_history:
+            print(history)
 
-    def take_loan(self):
-        pass
+    def take_loan(self, bank, amount):
+        if bank.loanFacility:
+            if bank.total_balance > amount:
+                if self.loan_count < 2:
+                    self.total_balance += amount
+                    bank.total_balance -= amount
+                    bank.total_loan += amount
+                    self.loan_count += 1
+                    print(f'Congrats! You have taken a loan of {amount}tk. Your current balance is {self.total_balance}')
+                    self.transaction_history.append(f'Take a loan off {amount}')
+                else:
+                    print("\nSorry, You can't take loan more than twice.")
+            else:
+                print("Sorry. The bank doesn't have enough money to provide loan.") 
+        else:
+            print("Taking loan is currently off by admin.")
+
+
 
 
 print("\n\t---Welcome to Standard Bank---\n")
